@@ -200,4 +200,24 @@ describe('SignUp Controller', () => {
       password: 'any_password'
     })
   })
+
+  test('Should return 200 if valid data is provider', () => {
+    const { sut } = makeSut()
+    const httpRequest = {
+      body: {
+        name: 'vailid_name',
+        email: 'vailid_email@mail.com',
+        password: 'vailid_password',
+        passwordConfirmation: 'vailid_password'
+      }
+    }
+    const httpResponse = sut.handle(httpRequest)
+    expect(httpResponse.statusCode).toBe(200)
+    expect(httpResponse.body).toEqual({
+      id: 'valid_id',
+      name: 'valid_name',
+      email: 'valid_email@mail.com',
+      password: 'valid_password'
+    })
+  })
 })
